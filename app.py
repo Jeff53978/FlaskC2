@@ -25,3 +25,4 @@ def login_post():
         flask.session['authenticated'] = True
         return flask.redirect('/')
     return flask.redirect('/login')
+
