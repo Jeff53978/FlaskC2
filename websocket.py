@@ -1,6 +1,7 @@
 from __main__ import app, sock, clients
 import os, random, json, time
 
+# Handshake + Ping for client
 @sock.route('/auth')
 def auth(ws):
     uuid = os.urandom(24).hex()
@@ -18,3 +19,10 @@ def auth(ws):
             print(f'Client {uuid} disconnected due to inactivity')
             ws.close()
             break
+        
+# Sends client list every second
+@sock.route('/clients')
+def clients(ws):
+    while not ws.closed:
+        ws.send(json.dumps({'clients': clients}))
+        time.sleep(1)
