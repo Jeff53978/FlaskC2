@@ -11,6 +11,8 @@ app = flask.Flask(__name__, static_folder='public', template_folder='templates')
 app.config['SECRET_KEY'] = os.urandom(24).hex()
 sock = Sock(app)   
 
+import websocket
+
 @pin_protected
 @app.get('/')
 def index():
