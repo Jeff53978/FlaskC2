@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+clients = []
+
 app = flask.Flask(__name__, static_folder='public', template_folder='templates')
 app.config['SECRET_KEY'] = os.urandom(24).hex()
 sock = Sock(app)   
@@ -25,4 +27,6 @@ def login_post():
         flask.session['authenticated'] = True
         return flask.redirect('/')
     return flask.redirect('/login')
+
+app.run(host='0.0.0.0', port=5000, debug=True)
 
